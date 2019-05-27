@@ -10,5 +10,11 @@ namespace SignalRChat.Hubs
 		{
 			await Clients.All.SendAsync("ReceiveMessage", user, $"{message} ({DateTime.Now})");
 		}
+
+		// https://docs.microsoft.com/en-us/aspnet/core/signalr/hubs?view=aspnetcore-2.2#send-messages-to-clients
+		public Task SendMessageToCaller(string message)
+		{
+			return Clients.Caller.SendAsync("ReceiveMessage", message);
+		}
 	}
 }
